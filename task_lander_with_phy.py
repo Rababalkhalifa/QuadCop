@@ -7,7 +7,7 @@ import gym.envs.box2d.lunar_lander as lunder
 class TaskLanderWithPhy():
     """Task (environment) that defines the goal and provides feedback to the agent."""
 
-    def __init__(self, env ,init_pose=None, init_velocities=None, 
+    def __init__(self, env=None ,init_pose=None, init_velocities=None, 
         init_angle_velocities=None, runtime=5., target_pos=None):
         
         """Initialize a Task object.
@@ -65,7 +65,9 @@ class TaskLanderWithPhy():
 #         return next_state, reward, done
     def get_reward(self):
         """Uses current pose of sim to return reward."""
-        reward = 1.3*(abs(self.sim.pose[:3] - self.target_pos)).sum()
+        reward = 1.3*(abs ( self.sim.v[2] ).sum() )
+        # print('velocity is ' , self.sim.v[2] , 'position',self.sim.pose[:3] ,'target' ,self.target_pos )
+        # print ('reward',reward)
         # if self.env.game_over or abs(self.env.state[0]) >= 1.0:
         #     done   = True
         #     reward = -100
